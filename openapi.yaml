@@ -1,0 +1,123 @@
+openapi: 3.0.3
+info:
+  title: Enterprise Member Intake API
+  description: Modern REST contract for ingesting transformed legacy batch member enrollments.
+  version: 1.0.0
+paths:
+  /v1/enrollments:
+    post:
+      summary: Submit Member Enrollment Payload
+      description: Accepts a validated JSON payload transformed from legacy XML batch records.
+      operationId: submitEnrollment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EnrollmentRequest'
+      responses:
+        '201':
+          description: Enrollment payload successfully ingested and queued.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnrollmentResponse'
+        '400':
+          description: Invalid payload structure or missing required schema parameters.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+components:
+  schemas:
+    EnrollmentRequest:
+      type: object
+      required:
+        - batchHeader
+        - members
+      properties:
+        batchHeader:
+          type: object
+          required:
+            - batchId
+            - sourceSystem
+            - recordCount
+          properties:
+            batchId:
+              type: string
+              example: "BATCH-2026-0810-001"
+            sourceSystem:
+              type: string
+              example: "LEGACY_MAINFRAME_OASIS"
+            recordCount:
+              type: integer
+              example: 2
+        members:
+          type: array
+          items:
+            $ref: '#/components/schemas/MemberRecord'
+
+    MemberRecord:
+      type: object
+      required:
+        - memberId
+        - firstName
+        - lastName
+        - dateOfBirth
+        - planCode
+      properties:
+        memberId:
+          type: string
+          example: "MEM-994821"
+        firstName:
+          type: string
+          example: "Jane"
+        lastName:
+          type: string
+          example: "Doe"
+        dateOfBirth:
+          type: string
+          format: date
+          example: "1985-04-12"
+        planCode:
+          type: string
+          example: "PPO-GOLD-2026"
+        coverageStatus:
+          type: string
+          enum: [ACTIVE, PENDING, TERMINATED]
+          default: "ACTIVE"
+
+    EnrollmentResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: "SUCCESS"
+        transactionId:
+          type: string
+          example: "TXN-88230192"
+        recordsProcessed:
+          type: integer
+          example: 2
+        timestamp:
+          type: string
+          format: date-time
+          example: "2026-08-10T11:00:00Z"
+
+    ErrorResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: "ERROR"
+        errorCode:
+          type: string
+          example: "INVALID_SCHEMA_PAYLOAD"
+        message:
+          type: string
+          example: "Required field 'planCode' is missing in member index 0."
+        timestamp:
+          type: string
+          format: date-time
+          example: "2026-08-10T11:00:00Z"

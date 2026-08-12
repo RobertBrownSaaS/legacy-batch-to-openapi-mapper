@@ -1,0 +1,9 @@
+﻿*.log
+*.tmp
+.vscode
+.postman
+.postman/*
+postman
+postman/*
+# Explicitly track the sample execution log artifact
+!transformation.log

@@ -1,0 +1,25 @@
+﻿{
+    "batchHeader":  {
+                        "batchId":  "BATCH-2026-0812-001",
+                        "sourceSystem":  "LEGACY_MAINFRAME_OASIS",
+                        "recordCount":  2
+                    },
+    "members":  [
+                    {
+                        "memberId":  "MEM-994821",
+                        "firstName":  "Jane",
+                        "lastName":  "Doe",
+                        "dateOfBirth":  "1985-04-12",
+                        "planCode":  "PPO-GOLD-2026",
+                        "coverageStatus":  "ACTIVE"
+                    },
+                    {
+                        "memberId":  "MEM-994822",
+                        "firstName":  "John",
+                        "lastName":  "Smith",
+                        "dateOfBirth":  "1978-11-23",
+                        "planCode":  "HDHP-SILVER-2026",
+                        "coverageStatus":  "PENDING"
+                    }
+                ]
+}

@@ -1,0 +1,79 @@
+{
+	"info": {
+		"_postman_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+		"name": "Enterprise Member Intake API - Integration Tests",
+		"description": "Validation and integration collection testing the /v1/enrollments REST API contract against mock and production environments.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1. Submit Valid Member Batch (201 Created)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer mock-jwt-token-2026",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"batchHeader\": {\n    \"batchId\": \"BATCH-2026-0810-001\",\n    \"sourceSystem\": \"LEGACY_MAINFRAME_OASIS\",\n    \"recordCount\": 2\n  },\n  \"members\": [\n    {\n      \"memberId\": \"MEM-994821\",\n      \"firstName\": \"Jane\",\n      \"lastName\": \"Doe\",\n      \"dateOfBirth\": \"1985-04-12\",\n      \"planCode\": \"PPO-GOLD-2026\",\n      \"coverageStatus\": \"ACTIVE\"\n    },\n    {\n      \"memberId\": \"MEM-994822\",\n      \"firstName\": \"John\",\n      \"lastName\": \"Smith\",\n      \"dateOfBirth\": \"1978-11-23\",\n      \"planCode\": \"HDHP-SILVER-2026\",\n      \"coverageStatus\": \"PENDING\"\n    }\n  ]\n}"
+				},
+				"url": {
+					"raw": "https://demo.mockapi.io/v1/enrollments",
+					"protocol": "https",
+					"host": [
+						"demo",
+						"mockapi",
+						"io"
+					],
+					"path": [
+						"v1",
+						"enrollments"
+					]
+				},
+				"description": "Tests sending a fully transformed, schema-compliant JSON payload containing batch headers and array elements."
+			},
+			"response": []
+		},
+		{
+			"name": "2. Reject Invalid Payload - Missing Mandatory Field (400 Bad Request)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"batchHeader\": {\n    \"batchId\": \"BATCH-2026-0810-002\",\n    \"sourceSystem\": \"LEGACY_MAINFRAME_OASIS\",\n    \"recordCount\": 1\n  },\n  \"members\": [\n    {\n      \"memberId\": \"MEM-994823\",\n      \"firstName\": \"Robert\",\n      \"lastName\": \"Brown\",\n      \"dateOfBirth\": \"1980-01-01\"\n    }\n  ]\n}"
+				},
+				"url": {
+					"raw": "https://demo.mockapi.io/v1/enrollments",
+					"protocol": "https",
+					"host": [
+						"demo",
+						"mockapi",
+						"io"
+					],
+					"path": [
+						"v1",
+						"enrollments"
+					]
+				},
+				"description": "Negative test case proving contract enforcement at the gateway level when required planCode field is omitted."
+			},
+			"response": []
+		}
+	]
+}

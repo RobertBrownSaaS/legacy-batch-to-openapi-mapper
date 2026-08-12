@@ -1,0 +1,18 @@
+﻿{
+    "batchId":  "BATCH-2026-0812-001",
+    "rejectedCount":  2,
+    "rejectedRecords":  [
+                            {
+                                "recordIndex":  3,
+                                "legacyId":  null,
+                                "failureReason":  "Missing mandatory schema field(s): memberId, firstName, lastName, dateOfBirth, planCode | Invalid CoverageStatus value \u0027\u0027. Allowed: ACTIVE, PENDING, TERMINATED",
+                                "rawXmlRecord":  "\u003cMember\u003e\u003cMemberID\u003eMEM-99202\u003c/MemberID\u003e\u003cFirstName\u003eCarl\u003c/FirstName\u003e\u003cLastName\u003eJones\u003c/LastName\u003e\u003cDateOfBirth\u003e1979-10-13\u003c/DateOfBirth\u003e\u003cPlanCode\u003e\u003c/PlanCode\u003e\u003cCoverageStatus\u003eUNKNOWN_STATUS\u003c/CoverageStatus\u003e\u003c/Member\u003e"
+                            },
+                            {
+                                "recordIndex":  4,
+                                "legacyId":  "MEM-994589",
+                                "failureReason":  "Invalid CoverageStatus value \u0027NA\u0027. Allowed: ACTIVE, PENDING, TERMINATED",
+                                "rawXmlRecord":  "\u003cMember\u003e\u003cLegacyID\u003eMEM-994589\u003c/LegacyID\u003e\u003cDemographics\u003e\u003cFirstName\u003eMary\u003c/FirstName\u003e\u003cLastName\u003eMitchell\u003c/LastName\u003e\u003cDOB\u003e1988-03-05\u003c/DOB\u003e\u003c/Demographics\u003e\u003cPlanSelection\u003e\u003cPlanCode\u003ePPO-PLATINUM-2026\u003c/PlanCode\u003e\u003cStatus\u003eNA\u003c/Status\u003e\u003c/PlanSelection\u003e\u003c/Member\u003e"
+                            }
+                        ]
+}

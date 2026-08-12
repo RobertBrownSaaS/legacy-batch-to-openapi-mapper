@@ -1,0 +1,8 @@
+[2026-08-12 09:35:08] [INFO] === Starting Batch to OpenAPI Transformation Pipeline ===
+[2026-08-12 09:35:08] [INFO] Loading source XML file: C:\Users\zangu\legacy-batch-to-openapi-mapper\sample-batch.xml
+[2026-08-12 09:35:08] [INFO] Processing Batch ID: BATCH-2026-0812-001 (4 records in envelope)
+[2026-08-12 09:35:08] [WARN] Record #3 (ID: '') FAILED validation. Missing mandatory schema field(s): memberId, firstName, lastName, dateOfBirth, planCode | Invalid CoverageStatus value ''. Allowed: ACTIVE, PENDING, TERMINATED
+[2026-08-12 09:35:08] [WARN] Record #4 (ID: 'MEM-994589') FAILED validation. Invalid CoverageStatus value 'NA'. Allowed: ACTIVE, PENDING, TERMINATED
+[2026-08-12 09:35:08] [INFO] Exported 2 valid record(s) to REST payload: C:\Users\zangu\legacy-batch-to-openapi-mapper\payload.json
+[2026-08-12 09:35:08] [WARN] Exported 2 rejected record(s) to Dead-Letter file: C:\Users\zangu\legacy-batch-to-openapi-mapper\rejected-records.json
+[2026-08-12 09:35:08] [INFO] === Transformation Complete ===
